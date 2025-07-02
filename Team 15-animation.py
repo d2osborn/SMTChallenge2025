@@ -61,6 +61,8 @@ def plot_animation(player_position_df: pd.DataFrame,
     game_id = merged_df['game_str'].unique()[0]
     game_text = ax.text(0, 400, f'Game ID: {game_id}', c='white', ha='center')
     play_text = ax.text(120, 0, f'Play: {play_id}', c='white', ha='center')
+    play_text = ax.text(120, 0, f'Play: {play_id}', c='white', ha='center')
+    
 
 
     def update(frame):
@@ -77,8 +79,8 @@ def plot_animation(player_position_df: pd.DataFrame,
         ball_size = (balls['ball_position_z'].values * 8)
         b.set_offsets(np.c_[balls['ball_position_x'], balls['ball_position_y']])
 
-        if ball_size < 1:
-             ball_size = np.array([10])
+        if ball_size.size == 0 or ball_size[0] < 1:
+            ball_size = np.array([10])
           
         b.set_sizes(ball_size)
 
@@ -94,7 +96,7 @@ def plot_animation(player_position_df: pd.DataFrame,
 
 
 con = db.connect("/Users/buttz/Desktop/SMTChallenge2025/smt_2025.db")
-player_pos = con.execute("SELECT * FROM player_pos WHERE game_str = 'y1_d069_ACN_QEA'").df().copy()
-ball_pos = con.execute("SELECT * FROM ball_pos WHERE game_str = 'y1_d069_ACN_QEA'").df().copy()
+player_pos = con.execute("SELECT * FROM player_pos WHERE game_str = 'y1_d001_CGA_QEA'").df().copy()
+ball_pos = con.execute("SELECT * FROM ball_pos WHERE game_str = 'y1_d001_CGA_QEA'").df().copy()
 
-plot_animation(player_pos, ball_pos, play_id =2, save_gif=True)
+plot_animation(player_pos, ball_pos, play_id = 2, save_gif=True)
