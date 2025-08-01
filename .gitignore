@@ -11,3 +11,5 @@ jump_data.csv
 bayesian_data.csv
 player_id_stats.csv
 players_w_aoe.csv
+filtered_bayesian_data.csv
+
